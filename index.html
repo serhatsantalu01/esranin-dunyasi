@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#1a102f">
+<title>Esra'nın Dünyası 3D · Deluxe Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #0f0a1c;
+  --panel-bg: rgba(26, 18, 48, 0.75);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --accent-pink: #ff529a;
+  --accent-purple: #9d50bb;
+  --accent-glow: rgba(255, 82, 154, 0.4);
+  --text-main: #ffffff;
+  --text-muted: #a39bb8;
+  --card-bg: rgba(255, 255, 255, 0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+html, body { width: 100%; height: 100%; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-main); background: var(--bg-dark); overflow: hidden; }
+
+/* Main App Layout */
+.app {
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: radial-gradient(circle at 50% 0%, #2a1b4e 0%, #0f0a1c 70%);
+  position: relative;
+}
+
+/* Header UI */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: rgba(15, 10, 28, 0.6);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--panel-border);
+  z-index: 10;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo-box {
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  display: grid; place-items: center;
+  font-size: 22px;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.brand-info h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
+.brand-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+
+.header-stats { display: flex; align-items: center; gap: 12px; }
+.stat-chip {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--panel-border);
+  padding: 8px 16px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex; align-items: center; gap: 6px;
+  backdrop-filter: blur(8px);
+}
+
+/* Main Studio Canvas */
+main {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 16px;
+  padding: 16px;
+  min-height: 0;
+}
+
+.panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* Sidebar Controls */
+.controls-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--panel-border);
+}
+.controls-header h2 { font-size: 16px; font-weight: 800; }
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 12px 20px;
+  background: rgba(0,0,0,0.2);
+}
+.tab-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 10px 0;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  color: white;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.controls-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.control-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.options-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.option-btn {
+  border: 1px solid var(--panel-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.option-btn:hover { background: rgba(255,255,255,0.1); }
+.option-btn.selected {
+  border-color: var(--accent-pink);
+  background: rgba(255, 82, 154, 0.15);
+  color: var(--accent-pink);
+}
+
+.swatch-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.swatch {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+  position: relative;
+}
+.swatch:hover { transform: scale(1.1); }
+.swatch.selected { border-color: var(--accent-pink); transform: scale(1.15); }
+.swatch.selected::after {
+  content: '✓';
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  color: white; font-size: 14px; font-weight: 900;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+.controls-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--panel-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.action-btn {
+  border: none;
+  padding: 12px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  color: white;
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+.action-btn.secondary {
+  background: rgba(255,255,255,0.08);
+  color: var(--text-main);
+  border: 1px solid var(--panel-border);
+}
+.action-btn:active { transform: scale(0.96); }
+
+/* 3D Viewport */
+.viewport {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--panel-border);
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.5);
+}
+#scene { width: 100%; height: 100%; display: block; }
+
+.viewport-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.top-bar { display: flex; justify-content: space-between; }
+.bottom-controls {
+  pointer-events: auto;
+  align-self: center;
+  display: flex;
+  gap: 10px;
+  background: rgba(15, 10, 28, 0.7);
+  backdrop-filter: blur(16px);
+  padding: 8px;
+  border-radius: 99px;
+  border: 1px solid var(--panel-border);
+}
+.tool-btn {
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tool-btn:hover { background: rgba(255,255,255,0.1); }
+
+/* Toast Messages */
+.toast {
+  position: absolute;
+  top: 80px; left: 50%; transform: translateX(-50%) translateY(-20px);
+  background: rgba(255, 82, 154, 0.9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 99px;
+  font-size: 13px; font-weight: 800;
+  box-shadow: 0 10px 30px var(--accent-glow);
+  opacity: 0; pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Mobile Responsiveness */
+@media (max-width: 860px) {
+  main { grid-template-columns: 1fr; grid-template-rows: 45vh 1fr; }
+  .viewport { grid-row: 1; }
+  .panel { grid-row: 2; }
+}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo-box">👑</div>
+      <div class="brand-info">
+        <h1>Esra'nın Dünyası 3D</h1>
+        <p>Stüdyo Sürümü v2.0</p>
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="stat-chip">✨ <span id="stars">250</span> Yıldız</div>
+      <div class="stat-chip">💎 <span id="score">Moda Skoru: 95</span></div>
+    </div>
+  </header>
+
+  <main>
+    <aside class="panel">
+      <div class="controls-header">
+        <h2>✨ Stüdyo Paneli</h2>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="outfit">👗 Elbise</button>
+        <button class="tab-btn" data-tab="style">💇 Saç & Yüz</button>
+        <button class="tab-btn" data-tab="stage">🎭 Sahne</button>
+      </div>
+      <div class="controls-body" id="tabContent"></div>
+      <div class="controls-footer">
+        <button class="action-btn secondary" id="randomizeBtn">🎲 Rastgele</button>
+        <button class="action-btn primary" id="captureBtn">📸 Fotoğraf Çek</button>
+      </div>
+    </aside>
+
+    <section class="viewport">
+      <canvas id="scene"></canvas>
+      <div class="toast" id="toast">Tebrikler! Yeni Kombin Oluşturuldu ✨</div>
+      <div class="viewport-overlay">
+        <div class="top-bar">
+          <div class="stat-chip">🌟 MODA PODYUMU</div>
+        </div>
+        <div class="bottom-controls">
+          <button class="tool-btn" id="rotateBtn">🔄 Döndür</button>
+          <button class="tool-btn" id="poseBtn">💃 Poz Ver</button>
+          <button class="tool-btn" id="lightBtn">💡 Işık Modu</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// Setup Renderer
+const canvas = document.querySelector('#scene');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+// Scene & Camera
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+camera.position.set(0, 2.3, 7.5);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 1.5, 0);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+// Lighting Setup
+const ambientLight = new THREE.HemisphereLight(0xffffff, 0x443355, 1.5);
+scene.add(ambientLight);
+
+const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
+mainLight.position.set(3, 6, 4);
+mainLight.castShadow = true;
+mainLight.shadow.mapSize.set(1024, 1024);
+scene.add(mainLight);
+
+const backLight = new THREE.DirectionalLight(0xff88cc, 1.5);
+backLight.position.set(-3, 4, -3);
+scene.add(backLight);
+
+// Platform & Stage
+const platformGeo = new THREE.CylinderGeometry(2, 2.2, 0.2, 64);
+const platformMat = new THREE.MeshStandardMaterial({ color: 0x1f1535, roughness: 0.3, metalness: 0.5 });
+const platform = new THREE.Mesh(platformGeo, platformMat);
+platform.position.y = -0.1;
+platform.receiveShadow = true;
+scene.add(platform);
+
+// Avatar Group
+const avatarGroup = new THREE.Group();
+scene.add(avatarGroup);
+
+// Character State
+const state = {
+  skin: '#f2c3a7',
+  hair: '#3d2314',
+  hairStyle: 'long',
+  outfitColor: '#ff529a',
+  shoesColor: '#ffffff',
+  outfitType: 'dress',
+  pose: 0
+};
+
+// Material Helper
+function getMat(color, roughness = 0.5, metalness = 0.1) {
+  return new THREE.MeshStandardMaterial({ color, roughness, metalness });
+}
+
+// Build Character Model
+function buildCharacter() {
+  while(avatarGroup.children.length) avatarGroup.remove(avatarGroup.children[0]);
+
+  const skinMat = getMat(state.skin, 0.6);
+  const hairMat = getMat(state.hair, 0.8);
+  const outfitMat = getMat(state.outfitColor, 0.3, 0.2);
+  const shoeMat = getMat(state.shoesColor, 0.2);
+
+  // Head & Body Base
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.32, 32, 32), skinMat);
+  head.position.y = 2.1;
+  head.scale.set(1, 1.15, 1);
+  head.castShadow = true;
+  avatarGroup.add(head);
+
+  // Eyes
+  const eyeMat = getMat('#1a1a1a', 0.1);
+  const eyeGeo = new THREE.SphereGeometry(0.035, 16, 16);
+  const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+  leftEye.position.set(-0.11, 2.15, 0.28);
+  const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+  rightEye.position.set(0.11, 2.15, 0.28);
+  avatarGroup.add(leftEye, rightEye);
+
+  // Torso
+  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.16, 0.6, 32), skinMat);
+  torso.position.y = 1.45;
+  torso.castShadow = true;
+  avatarGroup.add(torso);
+
+  // Outfit Logic
+  if (state.outfitType === 'dress') {
+    const dress = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.65, 0.7, 32), outfitMat);
+    dress.position.y = 1.25;
+    dress.castShadow = true;
+    avatarGroup.add(dress);
+  } else {
+    const top = new THREE.Mesh(new THREE.CylinderGeometry(0.21, 0.18, 0.35, 32), outfitMat);
+    top.position.y = 1.5;
+    avatarGroup.add(top);
+
+    const pants = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 0.6, 32), getMat('#333344'));
+    pants.position.y = 1.0;
+    avatarGroup.add(pants);
+  }
+
+  // Hair Styles
+  if (state.hairStyle === 'long') {
+    const hairTop = new THREE.Mesh(new THREE.SphereGeometry(0.35, 32, 32), hairMat);
+    hairTop.position.set(0, 2.2, -0.05);
+    const hairBack = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.4, 0.8, 32), hairMat);
+    hairBack.position.set(0, 1.8, -0.1);
+    avatarGroup.add(hairTop, hairBack);
+  } else {
+    const hairShort = new THREE.Mesh(new THREE.SphereGeometry(0.36, 32, 32), hairMat);
+    hairShort.position.set(0, 2.22, 0);
+    avatarGroup.add(hairShort);
+  }
+
+  // Shoes
+  const shoeGeo = new THREE.BoxGeometry(0.12, 0.1, 0.25);
+  const leftShoe = new THREE.Mesh(shoeGeo, shoeMat);
+  leftShoe.position.set(-0.12, 0.05, 0.05);
+  const rightShoe = new THREE.Mesh(shoeGeo, shoeMat);
+  rightShoe.position.set(0.12, 0.05, 0.05);
+  avatarGroup.add(leftShoe, rightShoe);
+}
+
+// UI Rendering & Controls
+const tabContent = document.querySelector('#tabContent');
+let currentTab = 'outfit';
+
+function showToast(msg) {
+  const toast = document.querySelector('#toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function renderUI() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === currentTab);
+  });
+
+  if (currentTab === 'outfit') {
+    tabContent.innerHTML = `
+      <div class="control-group">
+        <label>Kıyafet Tipi</label>
+        <div class="options-grid">
+          <button class="option-btn ${state.outfitType === 'dress' ? 'selected' : ''}" id="btnDress">👗 Şık Elbise</button>
+          <button class="option-btn ${state.outfitType === 'casual' ? 'selected' : ''}" id="btnCasual">👖 Günlük Kombin</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label>Kıyafet Rengi</label>
+        <div class="swatch-grid">
+          ${['#ff529a', '#9d50bb', '#4facfe', '#00f2fe', '#ff0844', '#ffffff'].map(c => 
+            `<div class="swatch ${state.outfitColor === c ? 'selected' : ''}" style="background:${c}" data-color="${c}"></div>`
+          ).join('')}
+        </div>
+      </div>
+    `;
+  } else if (currentTab === 'style') {
+    tabContent.innerHTML = `
+      <div class="control-group">
+        <label>Saç Stili</label>
+        <div class="options-grid">
+          <button class="option-btn ${state.hairStyle === 'long' ? 'selected' : ''}" id="btnHairLong">💇‍♀️ Uzun Saç</button>
+          <button class="option-btn ${state.hairStyle === 'short' ? 'selected' : ''}" id="btnHairShort">✂️ Kısa Saç</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label>Saç Rengi</label>
+        <div class="swatch-grid">
+          ${['#3d2314', '#e6be8a', '#111111', '#a83232', '#e882a7'].map(c => 
+            `<div class="swatch ${state.hair === c ? 'selected' : ''}" style="background:${c}" data-haircolor="${c}"></div>`
+          ).join('')}
+        </div>
+      </div>
+    `;
+  } else {
+    tabContent.innerHTML = `
+      <div class="control-group">
+        <label>Işık Modu</label>
+        <div class="options-grid">
+          <button class="option-btn selected" id="btnLight1">🌟 Gece Podyumu</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Bind UI Events
+  document.querySelectorAll('.swatch').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (e.target.dataset.color) state.outfitColor = e.target.dataset.color;
+      if (e.target.dataset.haircolor) state.hair = e.target.dataset.haircolor;
+      buildCharacter();
+      renderUI();
+    });
+  });
+
+  const btnDress = document.querySelector('#btnDress');
+  if(btnDress) btnDress.onclick = () => { state.outfitType = 'dress'; buildCharacter(); renderUI(); };
+  
+  const btnCasual = document.querySelector('#btnCasual');
+  if(btnCasual) btnCasual.onclick = () => { state.outfitType = 'casual'; buildCharacter(); renderUI(); };
+
+  const btnHairLong = document.querySelector('#btnHairLong');
+  if(btnHairLong) btnHairLong.onclick = () => { state.hairStyle = 'long'; buildCharacter(); renderUI(); };
+
+  const btnHairShort = document.querySelector('#btnHairShort');
+  if(btnHairShort) btnHairShort.onclick = () => { state.hairStyle = 'short'; buildCharacter(); renderUI(); };
+}
+
+// Tab Switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentTab = btn.dataset.tab;
+    renderUI();
+  });
+});
+
+// Controls & Buttons
+document.querySelector('#rotateBtn').onclick = () => {
+  controls.autoRotate = !controls.autoRotate;
+  showToast(controls.autoRotate ? 'Otomatik Dönüş Açıldı' : 'Dönüş Durduruldu');
+};
+
+document.querySelector('#poseBtn').onclick = () => {
+  state.pose = (state.pose + 1) % 2;
+  avatarGroup.rotation.y += Math.PI * 0.25;
+  showToast('Yeni Poz Verildi! 💃');
+};
+
+document.querySelector('#randomizeBtn').onclick = () => {
+  const colors = ['#ff529a', '#9d50bb', '#4facfe', '#00f2fe', '#ff0844'];
+  state.outfitColor = colors[Math.floor(Math.random() * colors.length)];
+  state.outfitType = Math.random() > 0.5 ? 'dress' : 'casual';
+  buildCharacter();
+  renderUI();
+  showToast('🎲 Sürpriz Kombin Yapıldı!');
+};
+
+document.querySelector('#captureBtn').onclick = () => {
+  renderer.render(scene, camera);
+  const link = document.createElement('a');
+  link.download = 'esra-3d-kombin.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  showToast('📸 Görsel İndirildi!');
+};
+
+// Window Resize
+window.addEventListener('resize', () => {
+  const w = canvas.clientWidth;
+  const h = canvas.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+});
+
+// Init Game Loop
+buildCharacter();
+renderUI();
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>
