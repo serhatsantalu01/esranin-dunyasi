@@ -2,605 +2,3556 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#1a102f">
-<title>Esra'nın Dünyası 3D · Deluxe Edition</title>
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+>
+
+<meta name="theme-color" content="#10091d">
+
+<title>Esra'nın Dünyası 3D</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg-dark: #0f0a1c;
-  --panel-bg: rgba(26, 18, 48, 0.75);
-  --panel-border: rgba(255, 255, 255, 0.12);
-  --accent-pink: #ff529a;
-  --accent-purple: #9d50bb;
-  --accent-glow: rgba(255, 82, 154, 0.4);
-  --text-main: #ffffff;
-  --text-muted: #a39bb8;
-  --card-bg: rgba(255, 255, 255, 0.05);
-}
 
-* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
-html, body { width: 100%; height: 100%; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-main); background: var(--bg-dark); overflow: hidden; }
+<link
+ href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+ rel="stylesheet"
+>
 
-/* Main App Layout */
-.app {
-  height: 100dvh;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  background: radial-gradient(circle at 50% 0%, #2a1b4e 0%, #0f0a1c 70%);
-  position: relative;
-}
-
-/* Header UI */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 24px;
-  background: rgba(15, 10, 28, 0.6);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--panel-border);
-  z-index: 10;
-}
-.brand { display: flex; align-items: center; gap: 12px; }
-.logo-box {
-  width: 44px; height: 44px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-  display: grid; place-items: center;
-  font-size: 22px;
-  box-shadow: 0 0 20px var(--accent-glow);
-}
-.brand-info h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
-.brand-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
-
-.header-stats { display: flex; align-items: center; gap: 12px; }
-.stat-chip {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--panel-border);
-  padding: 8px 16px;
-  border-radius: 99px;
-  font-size: 13px;
-  font-weight: 700;
-  display: flex; align-items: center; gap: 6px;
-  backdrop-filter: blur(8px);
-}
-
-/* Main Studio Canvas */
-main {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 16px;
-  padding: 16px;
-  min-height: 0;
-}
-
-.panel {
-  background: var(--panel-bg);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--panel-border);
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
-
-/* Sidebar Controls */
-.controls-header {
-  padding: 20px;
-  border-bottom: 1px solid var(--panel-border);
-}
-.controls-header h2 { font-size: 16px; font-weight: 800; }
-
-.tabs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  padding: 12px 20px;
-  background: rgba(0,0,0,0.2);
-}
-.tab-btn {
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  padding: 10px 0;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.tab-btn.active {
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-  color: white;
-  box-shadow: 0 4px 12px var(--accent-glow);
-}
-
-.controls-body {
-  padding: 20px;
-  overflow-y: auto;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.control-group label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 10px;
-}
-
-.options-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-.option-btn {
-  border: 1px solid var(--panel-border);
-  background: var(--card-bg);
-  color: var(--text-main);
-  padding: 10px 14px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.option-btn:hover { background: rgba(255,255,255,0.1); }
-.option-btn.selected {
-  border-color: var(--accent-pink);
-  background: rgba(255, 82, 154, 0.15);
-  color: var(--accent-pink);
-}
-
-.swatch-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.swatch {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.2);
-  cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s;
-  position: relative;
-}
-.swatch:hover { transform: scale(1.1); }
-.swatch.selected { border-color: var(--accent-pink); transform: scale(1.15); }
-.swatch.selected::after {
-  content: '✓';
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
-  color: white; font-size: 14px; font-weight: 900;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-}
-
-.controls-footer {
-  padding: 16px 20px;
-  border-top: 1px solid var(--panel-border);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.action-btn {
-  border: none;
-  padding: 12px;
-  border-radius: 14px;
-  font-weight: 800;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.action-btn.primary {
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-  color: white;
-  box-shadow: 0 6px 20px var(--accent-glow);
-}
-.action-btn.secondary {
-  background: rgba(255,255,255,0.08);
-  color: var(--text-main);
-  border: 1px solid var(--panel-border);
-}
-.action-btn:active { transform: scale(0.96); }
-
-/* 3D Viewport */
-.viewport {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid var(--panel-border);
-  box-shadow: inset 0 0 80px rgba(0,0,0,0.5);
-}
-#scene { width: 100%; height: 100%; display: block; }
-
-.viewport-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.top-bar { display: flex; justify-content: space-between; }
-.bottom-controls {
-  pointer-events: auto;
-  align-self: center;
-  display: flex;
-  gap: 10px;
-  background: rgba(15, 10, 28, 0.7);
-  backdrop-filter: blur(16px);
-  padding: 8px;
-  border-radius: 99px;
-  border: 1px solid var(--panel-border);
-}
-.tool-btn {
-  border: none;
-  background: transparent;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 99px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.tool-btn:hover { background: rgba(255,255,255,0.1); }
-
-/* Toast Messages */
-.toast {
-  position: absolute;
-  top: 80px; left: 50%; transform: translateX(-50%) translateY(-20px);
-  background: rgba(255, 82, 154, 0.9);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 99px;
-  font-size: 13px; font-weight: 800;
-  box-shadow: 0 10px 30px var(--accent-glow);
-  opacity: 0; pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* Mobile Responsiveness */
-@media (max-width: 860px) {
-  main { grid-template-columns: 1fr; grid-template-rows: 45vh 1fr; }
-  .viewport { grid-row: 1; }
-  .panel { grid-row: 2; }
-}
-</style>
 <script type="importmap">
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+    }
+}
 </script>
+
+<style>
+
+:root{
+    --bg:#0d0818;
+    --panel:rgba(25,15,43,.88);
+    --panel2:rgba(255,255,255,.055);
+    --border:rgba(255,255,255,.12);
+    --pink:#ff4f9a;
+    --pink2:#ff79b5;
+    --purple:#9a6cff;
+    --text:#fff;
+    --muted:#aaa0ba;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:"Plus Jakarta Sans",sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            #442266 0%,
+            #170d27 38%,
+            #0d0818 80%
+        );
+}
+
+button{
+    font-family:inherit;
+}
+
+.app{
+    width:100%;
+    height:100dvh;
+    display:grid;
+    grid-template-rows:74px 1fr;
+}
+
+/* HEADER */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:10px 22px;
+
+    border-bottom:1px solid var(--border);
+
+    background:rgba(10,6,18,.72);
+
+    backdrop-filter:blur(20px);
+
+    z-index:30;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:45px;
+    height:45px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4f9a,
+            #8b5cf6
+        );
+
+    box-shadow:
+        0 8px 30px rgba(255,79,154,.35);
+
+    font-size:21px;
+}
+
+.brand h1{
+    font-size:16px;
+    font-weight:800;
+}
+
+.brand p{
+    margin-top:3px;
+    font-size:10px;
+    color:var(--muted);
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.badge{
+    padding:8px 13px;
+    border-radius:99px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.055);
+
+    font-size:10px;
+    font-weight:800;
+}
+
+/* MAIN */
+
+.main{
+    min-height:0;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(310px,360px)
+        1fr;
+
+    gap:14px;
+
+    padding:14px;
+}
+
+/* PANEL */
+
+.panel{
+    min-height:0;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+
+    border:1px solid var(--border);
+
+    border-radius:25px;
+
+    background:var(--panel);
+
+    backdrop-filter:blur(22px);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.42);
+}
+
+.panel-head{
+    padding:18px 18px 12px;
+}
+
+.panel-head h2{
+    font-size:15px;
+    font-weight:800;
+}
+
+.panel-head span{
+    display:block;
+    margin-top:4px;
+    font-size:10px;
+    color:var(--muted);
+}
+
+/* TABS */
+
+.tabs{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    gap:5px;
+
+    padding:8px 12px;
+
+    background:rgba(0,0,0,.2);
+}
+
+.tab{
+    border:0;
+    border-radius:11px;
+
+    padding:10px 4px;
+
+    background:transparent;
+
+    color:#a69cb6;
+
+    font-size:10px;
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.tab.active{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--purple)
+        );
+
+    box-shadow:
+        0 5px 20px rgba(255,79,154,.25);
+}
+
+/* CONTENT */
+
+.content{
+    flex:1;
+    overflow-y:auto;
+
+    padding:16px;
+
+    scrollbar-width:thin;
+}
+
+.group{
+    margin-bottom:19px;
+}
+
+.group-title{
+    margin-bottom:9px;
+
+    color:#b7adca;
+
+    font-size:9px;
+    font-weight:800;
+
+    letter-spacing:.8px;
+
+    text-transform:uppercase;
+}
+
+.options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+.option{
+    border:1px solid var(--border);
+
+    border-radius:11px;
+
+    padding:9px 10px;
+
+    background:rgba(255,255,255,.045);
+
+    color:#eee;
+
+    font-size:9px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.18s;
+}
+
+.option:hover{
+    background:rgba(255,255,255,.1);
+}
+
+.option.selected{
+    border-color:var(--pink);
+
+    background:
+        rgba(255,79,154,.17);
+
+    color:#ff91bf;
+
+    box-shadow:
+        0 0 0 1px rgba(255,79,154,.08);
+}
+
+/* COLORS */
+
+.colors{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+}
+
+.color{
+    width:28px;
+    height:28px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(255,255,255,.18);
+
+    cursor:pointer;
+
+    transition:.15s;
+}
+
+.color:hover{
+    transform:scale(1.12);
+}
+
+.color.selected{
+    border-color:white;
+
+    outline:2px solid var(--pink);
+
+    transform:scale(1.1);
+}
+
+/* SLIDER */
+
+.slider{
+    width:100%;
+    accent-color:var(--pink);
+}
+
+/* FOOTER */
+
+.panel-footer{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:7px;
+
+    padding:12px 16px;
+
+    border-top:1px solid var(--border);
+}
+
+.action{
+    border:0;
+
+    border-radius:12px;
+
+    padding:11px;
+
+    color:#fff;
+
+    font-size:10px;
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.action.secondary{
+    background:rgba(255,255,255,.07);
+
+    border:1px solid var(--border);
+}
+
+.action.primary{
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--purple)
+        );
+}
+
+/* VIEWPORT */
+
+.viewport{
+    position:relative;
+
+    min-width:0;
+    min-height:0;
+
+    overflow:hidden;
+
+    border:1px solid var(--border);
+
+    border-radius:25px;
+
+    background:
+        radial-gradient(
+            circle at 50% 38%,
+            #38204d 0%,
+            #1a1027 35%,
+            #0d0818 78%
+        );
+
+    box-shadow:
+        inset 0 0 120px rgba(0,0,0,.55),
+        0 25px 80px rgba(0,0,0,.3);
+}
+
+#scene{
+    width:100%;
+    height:100%;
+
+    display:block;
+}
+
+/* VIEWPORT TOP */
+
+.viewport-top{
+    position:absolute;
+
+    top:17px;
+    left:18px;
+
+    z-index:10;
+
+    padding:8px 13px;
+
+    border-radius:99px;
+
+    border:1px solid var(--border);
+
+    background:rgba(15,8,25,.6);
+
+    backdrop-filter:blur(12px);
+
+    font-size:10px;
+    font-weight:800;
+}
+
+/* TOAST */
+
+.toast{
+    position:absolute;
+
+    top:20px;
+    left:50%;
+
+    transform:
+        translate(-50%,-15px);
+
+    opacity:0;
+
+    padding:10px 17px;
+
+    border-radius:99px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--purple)
+        );
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.35);
+
+    font-size:10px;
+    font-weight:800;
+
+    pointer-events:none;
+
+    transition:.25s;
+
+    z-index:50;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
+}
+
+/* VIEW CONTROLS */
+
+.controls{
+    position:absolute;
+
+    bottom:18px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    gap:5px;
+
+    padding:6px;
+
+    border-radius:99px;
+
+    border:1px solid var(--border);
+
+    background:rgba(13,8,24,.75);
+
+    backdrop-filter:blur(18px);
+
+    z-index:20;
+}
+
+.control{
+    border:0;
+
+    padding:9px 13px;
+
+    border-radius:99px;
+
+    background:transparent;
+
+    color:#fff;
+
+    font-size:9px;
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.control:hover{
+    background:rgba(255,255,255,.1);
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .app{
+        grid-template-rows:60px 1fr;
+    }
+
+    .header{
+        padding:8px 12px;
+    }
+
+    .brand h1{
+        font-size:13px;
+    }
+
+    .brand p{
+        display:none;
+    }
+
+    .logo{
+        width:38px;
+        height:38px;
+    }
+
+    .badge{
+        display:none;
+    }
+
+    .main{
+        grid-template-columns:1fr;
+        grid-template-rows:43% 57%;
+
+        padding:8px;
+    }
+
+    .viewport{
+        grid-row:1;
+        border-radius:20px;
+    }
+
+    .panel{
+        grid-row:2;
+        border-radius:20px;
+    }
+
+}
+
+</style>
 </head>
+
 <body>
 
 <div class="app">
-  <header>
-    <div class="brand">
-      <div class="logo-box">👑</div>
-      <div class="brand-info">
-        <h1>Esra'nın Dünyası 3D</h1>
-        <p>Stüdyo Sürümü v2.0</p>
-      </div>
-    </div>
-    <div class="header-stats">
-      <div class="stat-chip">✨ <span id="stars">250</span> Yıldız</div>
-      <div class="stat-chip">💎 <span id="score">Moda Skoru: 95</span></div>
-    </div>
-  </header>
 
-  <main>
-    <aside class="panel">
-      <div class="controls-header">
-        <h2>✨ Stüdyo Paneli</h2>
-      </div>
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="outfit">👗 Elbise</button>
-        <button class="tab-btn" data-tab="style">💇 Saç & Yüz</button>
-        <button class="tab-btn" data-tab="stage">🎭 Sahne</button>
-      </div>
-      <div class="controls-body" id="tabContent"></div>
-      <div class="controls-footer">
-        <button class="action-btn secondary" id="randomizeBtn">🎲 Rastgele</button>
-        <button class="action-btn primary" id="captureBtn">📸 Fotoğraf Çek</button>
-      </div>
-    </aside>
+    <header class="header">
 
-    <section class="viewport">
-      <canvas id="scene"></canvas>
-      <div class="toast" id="toast">Tebrikler! Yeni Kombin Oluşturuldu ✨</div>
-      <div class="viewport-overlay">
-        <div class="top-bar">
-          <div class="stat-chip">🌟 MODA PODYUMU</div>
+        <div class="brand">
+
+            <div class="logo">
+                🎀
+            </div>
+
+            <div>
+                <h1>Esra'nın Dünyası 3D</h1>
+                <p>Deluxe Moda & Gardırop Stüdyosu</p>
+            </div>
+
         </div>
-        <div class="bottom-controls">
-          <button class="tool-btn" id="rotateBtn">🔄 Döndür</button>
-          <button class="tool-btn" id="poseBtn">💃 Poz Ver</button>
-          <button class="tool-btn" id="lightBtn">💡 Işık Modu</button>
+
+        <div class="header-right">
+
+            <div class="badge">
+                ✨ 20+ MODEL
+            </div>
+
+            <div class="badge">
+                💎 DELUXE
+            </div>
+
         </div>
-      </div>
-    </section>
-  </main>
+
+    </header>
+
+
+    <main class="main">
+
+        <aside class="panel">
+
+            <div class="panel-head">
+
+                <h2>✨ Moda Stüdyosu</h2>
+
+                <span>
+                    Karakterini istediğin gibi tasarla
+                </span>
+
+            </div>
+
+
+            <div class="tabs">
+
+                <button
+                    class="tab active"
+                    data-tab="clothes"
+                >
+                    👗 Kıyafet
+                </button>
+
+                <button
+                    class="tab"
+                    data-tab="look"
+                >
+                    💇 Görünüm
+                </button>
+
+                <button
+                    class="tab"
+                    data-tab="accessory"
+                >
+                    👑 Aksesuar
+                </button>
+
+            </div>
+
+
+            <div
+                class="content"
+                id="content"
+            ></div>
+
+
+            <div class="panel-footer">
+
+                <button
+                    class="action secondary"
+                    id="randomBtn"
+                >
+                    🎲 Sürpriz Kombin
+                </button>
+
+                <button
+                    class="action primary"
+                    id="saveBtn"
+                >
+                    📸 Fotoğraf
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <section class="viewport">
+
+            <div class="viewport-top">
+                👗 3D FASHION STUDIO
+            </div>
+
+            <canvas id="scene"></canvas>
+
+            <div
+                class="toast"
+                id="toast"
+            >
+                ✨ Tasarım değiştirildi
+            </div>
+
+
+            <div class="controls">
+
+                <button
+                    class="control"
+                    id="rotateBtn"
+                >
+                    🔄 Döndür
+                </button>
+
+                <button
+                    class="control"
+                    id="poseBtn"
+                >
+                    💃 Poz
+                </button>
+
+                <button
+                    class="control"
+                    id="resetBtn"
+                >
+                    ↩ Sıfırla
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
 </div>
 
+
 <script type="module">
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-// Setup Renderer
-const canvas = document.querySelector('#scene');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true, alpha: true });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
+import * as THREE from "three";
 
-// Scene & Camera
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(35, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
-camera.position.set(0, 2.3, 7.5);
+import {
+    OrbitControls
+} from "three/addons/controls/OrbitControls.js";
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, 1.5, 0);
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
 
-// Lighting Setup
-const ambientLight = new THREE.HemisphereLight(0xffffff, 0x443355, 1.5);
-scene.add(ambientLight);
+/* ============================================================
+   RENDERER
+============================================================ */
 
-const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
-mainLight.position.set(3, 6, 4);
-mainLight.castShadow = true;
-mainLight.shadow.mapSize.set(1024, 1024);
-scene.add(mainLight);
+const canvas =
+    document.getElementById("scene");
 
-const backLight = new THREE.DirectionalLight(0xff88cc, 1.5);
-backLight.position.set(-3, 4, -3);
-scene.add(backLight);
-
-// Platform & Stage
-const platformGeo = new THREE.CylinderGeometry(2, 2.2, 0.2, 64);
-const platformMat = new THREE.MeshStandardMaterial({ color: 0x1f1535, roughness: 0.3, metalness: 0.5 });
-const platform = new THREE.Mesh(platformGeo, platformMat);
-platform.position.y = -0.1;
-platform.receiveShadow = true;
-scene.add(platform);
-
-// Avatar Group
-const avatarGroup = new THREE.Group();
-scene.add(avatarGroup);
-
-// Character State
-const state = {
-  skin: '#f2c3a7',
-  hair: '#3d2314',
-  hairStyle: 'long',
-  outfitColor: '#ff529a',
-  shoesColor: '#ffffff',
-  outfitType: 'dress',
-  pose: 0
-};
-
-// Material Helper
-function getMat(color, roughness = 0.5, metalness = 0.1) {
-  return new THREE.MeshStandardMaterial({ color, roughness, metalness });
-}
-
-// Build Character Model
-function buildCharacter() {
-  while(avatarGroup.children.length) avatarGroup.remove(avatarGroup.children[0]);
-
-  const skinMat = getMat(state.skin, 0.6);
-  const hairMat = getMat(state.hair, 0.8);
-  const outfitMat = getMat(state.outfitColor, 0.3, 0.2);
-  const shoeMat = getMat(state.shoesColor, 0.2);
-
-  // Head & Body Base
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.32, 32, 32), skinMat);
-  head.position.y = 2.1;
-  head.scale.set(1, 1.15, 1);
-  head.castShadow = true;
-  avatarGroup.add(head);
-
-  // Eyes
-  const eyeMat = getMat('#1a1a1a', 0.1);
-  const eyeGeo = new THREE.SphereGeometry(0.035, 16, 16);
-  const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
-  leftEye.position.set(-0.11, 2.15, 0.28);
-  const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
-  rightEye.position.set(0.11, 2.15, 0.28);
-  avatarGroup.add(leftEye, rightEye);
-
-  // Torso
-  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.16, 0.6, 32), skinMat);
-  torso.position.y = 1.45;
-  torso.castShadow = true;
-  avatarGroup.add(torso);
-
-  // Outfit Logic
-  if (state.outfitType === 'dress') {
-    const dress = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.65, 0.7, 32), outfitMat);
-    dress.position.y = 1.25;
-    dress.castShadow = true;
-    avatarGroup.add(dress);
-  } else {
-    const top = new THREE.Mesh(new THREE.CylinderGeometry(0.21, 0.18, 0.35, 32), outfitMat);
-    top.position.y = 1.5;
-    avatarGroup.add(top);
-
-    const pants = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 0.6, 32), getMat('#333344'));
-    pants.position.y = 1.0;
-    avatarGroup.add(pants);
-  }
-
-  // Hair Styles
-  if (state.hairStyle === 'long') {
-    const hairTop = new THREE.Mesh(new THREE.SphereGeometry(0.35, 32, 32), hairMat);
-    hairTop.position.set(0, 2.2, -0.05);
-    const hairBack = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.4, 0.8, 32), hairMat);
-    hairBack.position.set(0, 1.8, -0.1);
-    avatarGroup.add(hairTop, hairBack);
-  } else {
-    const hairShort = new THREE.Mesh(new THREE.SphereGeometry(0.36, 32, 32), hairMat);
-    hairShort.position.set(0, 2.22, 0);
-    avatarGroup.add(hairShort);
-  }
-
-  // Shoes
-  const shoeGeo = new THREE.BoxGeometry(0.12, 0.1, 0.25);
-  const leftShoe = new THREE.Mesh(shoeGeo, shoeMat);
-  leftShoe.position.set(-0.12, 0.05, 0.05);
-  const rightShoe = new THREE.Mesh(shoeGeo, shoeMat);
-  rightShoe.position.set(0.12, 0.05, 0.05);
-  avatarGroup.add(leftShoe, rightShoe);
-}
-
-// UI Rendering & Controls
-const tabContent = document.querySelector('#tabContent');
-let currentTab = 'outfit';
-
-function showToast(msg) {
-  const toast = document.querySelector('#toast');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
-}
-
-function renderUI() {
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.tab === currentTab);
-  });
-
-  if (currentTab === 'outfit') {
-    tabContent.innerHTML = `
-      <div class="control-group">
-        <label>Kıyafet Tipi</label>
-        <div class="options-grid">
-          <button class="option-btn ${state.outfitType === 'dress' ? 'selected' : ''}" id="btnDress">👗 Şık Elbise</button>
-          <button class="option-btn ${state.outfitType === 'casual' ? 'selected' : ''}" id="btnCasual">👖 Günlük Kombin</button>
-        </div>
-      </div>
-      <div class="control-group">
-        <label>Kıyafet Rengi</label>
-        <div class="swatch-grid">
-          ${['#ff529a', '#9d50bb', '#4facfe', '#00f2fe', '#ff0844', '#ffffff'].map(c => 
-            `<div class="swatch ${state.outfitColor === c ? 'selected' : ''}" style="background:${c}" data-color="${c}"></div>`
-          ).join('')}
-        </div>
-      </div>
-    `;
-  } else if (currentTab === 'style') {
-    tabContent.innerHTML = `
-      <div class="control-group">
-        <label>Saç Stili</label>
-        <div class="options-grid">
-          <button class="option-btn ${state.hairStyle === 'long' ? 'selected' : ''}" id="btnHairLong">💇‍♀️ Uzun Saç</button>
-          <button class="option-btn ${state.hairStyle === 'short' ? 'selected' : ''}" id="btnHairShort">✂️ Kısa Saç</button>
-        </div>
-      </div>
-      <div class="control-group">
-        <label>Saç Rengi</label>
-        <div class="swatch-grid">
-          ${['#3d2314', '#e6be8a', '#111111', '#a83232', '#e882a7'].map(c => 
-            `<div class="swatch ${state.hair === c ? 'selected' : ''}" style="background:${c}" data-haircolor="${c}"></div>`
-          ).join('')}
-        </div>
-      </div>
-    `;
-  } else {
-    tabContent.innerHTML = `
-      <div class="control-group">
-        <label>Işık Modu</label>
-        <div class="options-grid">
-          <button class="option-btn selected" id="btnLight1">🌟 Gece Podyumu</button>
-        </div>
-      </div>
-    `;
-  }
-
-  // Bind UI Events
-  document.querySelectorAll('.swatch').forEach(el => {
-    el.addEventListener('click', (e) => {
-      if (e.target.dataset.color) state.outfitColor = e.target.dataset.color;
-      if (e.target.dataset.haircolor) state.hair = e.target.dataset.haircolor;
-      buildCharacter();
-      renderUI();
+const renderer =
+    new THREE.WebGLRenderer({
+        canvas,
+        antialias:true,
+        alpha:false,
+        preserveDrawingBuffer:true
     });
-  });
 
-  const btnDress = document.querySelector('#btnDress');
-  if(btnDress) btnDress.onclick = () => { state.outfitType = 'dress'; buildCharacter(); renderUI(); };
-  
-  const btnCasual = document.querySelector('#btnCasual');
-  if(btnCasual) btnCasual.onclick = () => { state.outfitType = 'casual'; buildCharacter(); renderUI(); };
+renderer.setPixelRatio(
+    Math.min(
+        window.devicePixelRatio,
+        2
+    )
+);
 
-  const btnHairLong = document.querySelector('#btnHairLong');
-  if(btnHairLong) btnHairLong.onclick = () => { state.hairStyle = 'long'; buildCharacter(); renderUI(); };
+renderer.setSize(
+    canvas.clientWidth,
+    canvas.clientHeight,
+    false
+);
 
-  const btnHairShort = document.querySelector('#btnHairShort');
-  if(btnHairShort) btnHairShort.onclick = () => { state.hairStyle = 'short'; buildCharacter(); renderUI(); };
+renderer.shadowMap.enabled=true;
+
+renderer.shadowMap.type =
+    THREE.PCFSoftShadowMap;
+
+renderer.outputColorSpace =
+    THREE.SRGBColorSpace;
+
+renderer.toneMapping =
+    THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+    1.15;
+
+
+/* ============================================================
+   SCENE
+============================================================ */
+
+const scene =
+    new THREE.Scene();
+
+scene.background =
+    new THREE.Color("#120a1d");
+
+
+/* ============================================================
+   CAMERA
+============================================================ */
+
+const camera =
+    new THREE.PerspectiveCamera(
+        32,
+        canvas.clientWidth /
+        canvas.clientHeight,
+        .1,
+        100
+    );
+
+camera.position.set(
+    0,
+    2.05,
+    7.2
+);
+
+
+/* ============================================================
+   CONTROLS
+============================================================ */
+
+const controls =
+    new OrbitControls(
+        camera,
+        renderer.domElement
+    );
+
+controls.enableDamping=true;
+
+controls.dampingFactor=.055;
+
+controls.minDistance=4.6;
+
+controls.maxDistance=9;
+
+controls.target.set(
+    0,
+    1.35,
+    0
+);
+
+
+/* ============================================================
+   LIGHTING
+============================================================ */
+
+scene.add(
+    new THREE.HemisphereLight(
+        0xffffff,
+        0x392347,
+        2.1
+    )
+);
+
+
+const keyLight =
+    new THREE.DirectionalLight(
+        0xffffff,
+        3.1
+    );
+
+keyLight.position.set(
+    4.5,
+    7,
+    5
+);
+
+keyLight.castShadow=true;
+
+keyLight.shadow.mapSize.set(
+    2048,
+    2048
+);
+
+keyLight.shadow.camera.near=.1;
+
+keyLight.shadow.camera.far=20;
+
+scene.add(keyLight);
+
+
+const fillLight =
+    new THREE.DirectionalLight(
+        0xff8bc7,
+        1.6
+    );
+
+fillLight.position.set(
+    -4,
+    4,
+    3
+);
+
+scene.add(fillLight);
+
+
+const rimLight =
+    new THREE.PointLight(
+        0x9d75ff,
+        25,
+        12
+    );
+
+rimLight.position.set(
+    0,
+    3,
+    -4
+);
+
+scene.add(rimLight);
+
+
+/* ============================================================
+   FLOOR
+============================================================ */
+
+const floor =
+    new THREE.Mesh(
+
+        new THREE.CylinderGeometry(
+            2.05,
+            2.2,
+            .14,
+            96
+        ),
+
+        new THREE.MeshStandardMaterial({
+            color:"#2b183d",
+            roughness:.35,
+            metalness:.45
+        })
+
+    );
+
+floor.position.y=-.07;
+
+floor.receiveShadow=true;
+
+scene.add(floor);
+
+
+const floorRing =
+    new THREE.Mesh(
+
+        new THREE.TorusGeometry(
+            1.82,
+            .025,
+            12,
+            96
+        ),
+
+        new THREE.MeshStandardMaterial({
+            color:"#ff5aa7",
+            roughness:.2,
+            metalness:.8
+        })
+
+    );
+
+floorRing.rotation.x =
+    Math.PI / 2;
+
+floorRing.position.y=.015;
+
+scene.add(floorRing);
+
+
+/* ============================================================
+   CHARACTER ROOT
+============================================================ */
+
+const character =
+    new THREE.Group();
+
+scene.add(character);
+
+
+/* ============================================================
+   STATE
+============================================================ */
+
+const state={
+
+    category:"dress",
+
+    model:"princess",
+
+    color:"#ed65ad",
+
+    topColor:"#9d83e8",
+
+    shoeColor:"#ffffff",
+
+    hair:"#58334c",
+
+    hairStyle:"long",
+
+    skin:"#f1c5a6",
+
+    accessory:"tiara",
+
+    pose:0,
+
+    zoom:0
+
+};
+
+
+/* ============================================================
+   MATERIAL
+============================================================ */
+
+function material(
+    color,
+    roughness=.45,
+    metalness=.05
+){
+
+    return new THREE.MeshStandardMaterial({
+        color,
+        roughness,
+        metalness
+    });
+
 }
 
-// Tab Switching
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    currentTab = btn.dataset.tab;
-    renderUI();
-  });
-});
 
-// Controls & Buttons
-document.querySelector('#rotateBtn').onclick = () => {
-  controls.autoRotate = !controls.autoRotate;
-  showToast(controls.autoRotate ? 'Otomatik Dönüş Açıldı' : 'Dönüş Durduruldu');
-};
+/* ============================================================
+   BASIC MESH HELPERS
+============================================================ */
 
-document.querySelector('#poseBtn').onclick = () => {
-  state.pose = (state.pose + 1) % 2;
-  avatarGroup.rotation.y += Math.PI * 0.25;
-  showToast('Yeni Poz Verildi! 💃');
-};
+function addSphere(
+    parent,
+    color,
+    position,
+    scale
+){
 
-document.querySelector('#randomizeBtn').onclick = () => {
-  const colors = ['#ff529a', '#9d50bb', '#4facfe', '#00f2fe', '#ff0844'];
-  state.outfitColor = colors[Math.floor(Math.random() * colors.length)];
-  state.outfitType = Math.random() > 0.5 ? 'dress' : 'casual';
-  buildCharacter();
-  renderUI();
-  showToast('🎲 Sürpriz Kombin Yapıldı!');
-};
+    const mesh =
+        new THREE.Mesh(
 
-document.querySelector('#captureBtn').onclick = () => {
-  renderer.render(scene, camera);
-  const link = document.createElement('a');
-  link.download = 'esra-3d-kombin.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
-  showToast('📸 Görsel İndirildi!');
-};
+            new THREE.SphereGeometry(
+                1,
+                32,
+                24
+            ),
 
-// Window Resize
-window.addEventListener('resize', () => {
-  const w = canvas.clientWidth;
-  const h = canvas.clientHeight;
-  renderer.setSize(w, h, false);
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-});
+            material(color)
+        );
 
-// Init Game Loop
+    mesh.position.set(
+        ...position
+    );
+
+    mesh.scale.set(
+        ...scale
+    );
+
+    mesh.castShadow=true;
+
+    mesh.receiveShadow=true;
+
+    parent.add(mesh);
+
+    return mesh;
+
+}
+
+
+function addCapsule(
+    parent,
+    color,
+    position,
+    radius,
+    length
+){
+
+    const mesh =
+        new THREE.Mesh(
+
+            new THREE.CapsuleGeometry(
+                radius,
+                length,
+                8,
+                24
+            ),
+
+            material(color)
+        );
+
+    mesh.position.set(
+        ...position
+    );
+
+    mesh.castShadow=true;
+
+    mesh.receiveShadow=true;
+
+    parent.add(mesh);
+
+    return mesh;
+
+}
+
+
+function addCylinder(
+    parent,
+    color,
+    position,
+    radiusTop,
+    radiusBottom,
+    height,
+    segments=48
+){
+
+    /*
+        Three.js sırası:
+
+        radiusTop
+        radiusBottom
+        height
+
+        Böylece artık etekleri ters çevirmiyoruz.
+    */
+
+    const mesh =
+        new THREE.Mesh(
+
+            new THREE.CylinderGeometry(
+                radiusTop,
+                radiusBottom,
+                height,
+                segments
+            ),
+
+            material(color)
+        );
+
+    mesh.position.set(
+        ...position
+    );
+
+    mesh.castShadow=true;
+
+    mesh.receiveShadow=true;
+
+    parent.add(mesh);
+
+    return mesh;
+
+}
+
+
+/* ============================================================
+   PERFECTLY SYMMETRIC SKIRT
+============================================================ */
+
+function skirt(
+    color,
+    y,
+    radiusTop,
+    radiusBottom,
+    height
+){
+
+    const garment =
+        new THREE.Group();
+
+    garment.position.set(
+        0,
+        0,
+        0
+    );
+
+    const mesh =
+        addCylinder(
+            garment,
+            color,
+            [0,y,0],
+            radiusTop,
+            radiusBottom,
+            height,
+            72
+        );
+
+    mesh.rotation.set(
+        0,
+        0,
+        0
+    );
+
+    character.add(
+        garment
+    );
+
+    return garment;
+
+}
+
+
+/* ============================================================
+   PLEATED SKIRT
+============================================================ */
+
+function pleatedSkirt(
+    color,
+    y,
+    topRadius,
+    bottomRadius,
+    height
+){
+
+    const geometry =
+        new THREE.CylinderGeometry(
+            topRadius,
+            bottomRadius,
+            height,
+            96,
+            1,
+            false
+        );
+
+    /*
+        Radyal yüzeyde düzenli pile.
+        Bütün noktalar merkezden eşit uzaklıkta.
+    */
+
+    const pos =
+        geometry.attributes.position;
+
+    for(
+        let i=0;
+        i<pos.count;
+        i++
+    ){
+
+        const x =
+            pos.getX(i);
+
+        const z =
+            pos.getZ(i);
+
+        const angle =
+            Math.atan2(z,x);
+
+        const radius =
+            Math.sqrt(
+                x*x+z*z
+            );
+
+        const folds=24;
+
+        const wave =
+            Math.cos(
+                angle*folds
+            );
+
+        const factor =
+            1 + wave*.055;
+
+        pos.setX(
+            i,
+            x*factor
+        );
+
+        pos.setZ(
+            i,
+            z*factor
+        );
+
+    }
+
+    pos.needsUpdate=true;
+
+    geometry.computeVertexNormals();
+
+
+    const mesh =
+        new THREE.Mesh(
+            geometry,
+            material(color,.4)
+        );
+
+    mesh.position.y=y;
+
+    mesh.castShadow=true;
+
+    mesh.receiveShadow=true;
+
+    character.add(mesh);
+
+}
+
+
+/* ============================================================
+   LAYER
+============================================================ */
+
+function layer(
+    color,
+    y,
+    top,
+    bottom,
+    height
+){
+
+    skirt(
+        color,
+        y,
+        top,
+        bottom,
+        height
+    );
+
+}
+
+
+/* ============================================================
+   TOP
+============================================================ */
+
+function makeTop(
+    color,
+    style="elegant"
+){
+
+    if(style==="crop"){
+
+        addCylinder(
+            character,
+            color,
+            [0,1.51,0],
+            .235,
+            .285,
+            .27
+        );
+
+        return;
+    }
+
+
+    if(style==="strapless"){
+
+        addCylinder(
+            character,
+            color,
+            [0,1.53,0],
+            .245,
+            .29,
+            .35
+        );
+
+        return;
+    }
+
+
+    if(style==="oversize"){
+
+        addCylinder(
+            character,
+            color,
+            [0,1.50,0],
+            .29,
+            .34,
+            .47
+        );
+
+        return;
+    }
+
+
+    if(style==="jacket"){
+
+        addCylinder(
+            character,
+            color,
+            [0,1.51,0],
+            .30,
+            .33,
+            .45
+        );
+
+        return;
+    }
+
+
+    addCylinder(
+        character,
+        color,
+        [0,1.50,0],
+        .24,
+        .29,
+        .42
+    );
+
+}
+
+
+/* ============================================================
+   BELT
+============================================================ */
+
+function belt(
+    color="#f5cf69",
+    y=1.31,
+    radius=.29
+){
+
+    const mesh =
+        new THREE.Mesh(
+
+            new THREE.TorusGeometry(
+                radius,
+                .025,
+                10,
+                64
+            ),
+
+            material(
+                color,
+                .25,
+                .55
+            )
+        );
+
+    mesh.rotation.x =
+        Math.PI/2;
+
+    mesh.position.y=y;
+
+    character.add(mesh);
+
+}
+
+
+/* ============================================================
+   PANTS
+============================================================ */
+
+function pants(
+    color,
+    type="straight"
+){
+
+    let radius=.125;
+
+    let length=.66;
+
+
+    if(type==="skinny"){
+
+        radius=.102;
+        length=.70;
+
+    }
+
+
+    if(type==="wide"){
+
+        radius=.18;
+        length=.63;
+
+    }
+
+
+    if(type==="flare"){
+
+        radius=.135;
+        length=.65;
+
+    }
+
+
+    if(type==="cargo"){
+
+        radius=.145;
+        length=.65;
+
+    }
+
+
+    addCapsule(
+        character,
+        color,
+        [-.215,.69,0],
+        radius,
+        length
+    );
+
+
+    addCapsule(
+        character,
+        color,
+        [.215,.69,0],
+        radius,
+        length
+    );
+
+
+    if(type==="cargo"){
+
+        addBoxPocket(
+            color,
+            [-.355,.83,.04]
+        );
+
+        addBoxPocket(
+            color,
+            [.355,.83,.04]
+        );
+
+    }
+
+}
+
+
+function addBoxPocket(
+    color,
+    position
+){
+
+    const mesh =
+        new THREE.Mesh(
+
+            new THREE.BoxGeometry(
+                .09,
+                .13,
+                .05
+            ),
+
+            material(color)
+        );
+
+    mesh.position.set(
+        ...position
+    );
+
+    mesh.castShadow=true;
+
+    character.add(mesh);
+
+}
+
+
+/* ============================================================
+   SHORTS
+============================================================ */
+
+function shorts(
+    color,
+    mini=false
+){
+
+    const height =
+        mini ? .17 : .24;
+
+    const radius =
+        mini ? .145 : .17;
+
+
+    addCylinder(
+        character,
+        color,
+        [-.13,1.13,0],
+        radius,
+        radius+.025,
+        height,
+        32
+    );
+
+
+    addCylinder(
+        character,
+        color,
+        [.13,1.13,0],
+        radius,
+        radius+.025,
+        height,
+        32
+    );
+
+}
+
+
+/* ============================================================
+   SHOES
+============================================================ */
+
+function shoes(){
+
+    addSphere(
+        character,
+        state.shoeColor,
+        [-.22,.17,.10],
+        [.17,.09,.30]
+    );
+
+    addSphere(
+        character,
+        state.shoeColor,
+        [.22,.17,.10],
+        [.17,.09,.30]
+    );
+
+}
+
+
+/* ============================================================
+   BODY
+============================================================ */
+
+function body(){
+
+    const skin =
+        state.skin;
+
+
+    /* LEGS */
+
+    addCapsule(
+        character,
+        skin,
+        [-.22,.67,0],
+        .105,
+        .70
+    );
+
+    addCapsule(
+        character,
+        skin,
+        [.22,.67,0],
+        .105,
+        .70
+    );
+
+
+    /* SHOES */
+
+    shoes();
+
+
+    /* TORSO */
+
+    addCapsule(
+        character,
+        skin,
+        [0,1.43,0],
+        .19,
+        .45
+    );
+
+
+    /* ARMS */
+
+    const left =
+        addCapsule(
+            character,
+            skin,
+            [-.33,1.44,0],
+            .07,
+            .38
+        );
+
+    left.rotation.z=-.18;
+
+
+    const right =
+        addCapsule(
+            character,
+            skin,
+            [.33,1.44,0],
+            .07,
+            .38
+        );
+
+    right.rotation.z=.18;
+
+
+    /* NECK */
+
+    addCylinder(
+        character,
+        skin,
+        [0,1.91,0],
+        .09,
+        .09,
+        .18,
+        32
+    );
+
+
+    /* HEAD */
+
+    addSphere(
+        character,
+        skin,
+        [0,2.20,0],
+        [.34,.40,.30]
+    );
+
+
+    /* EYES */
+
+    addSphere(
+        character,
+        "#302034",
+        [-.12,2.23,.286],
+        [.035,.048,.022]
+    );
+
+    addSphere(
+        character,
+        "#302034",
+        [.12,2.23,.286],
+        [.035,.048,.022]
+    );
+
+
+    /* NOSE */
+
+    addSphere(
+        character,
+        "#d99f82",
+        [0,2.15,.295],
+        [.022,.035,.018]
+    );
+
+
+    /* HAIR */
+
+    makeHair();
+
+}
+
+
+/* ============================================================
+   HAIR
+============================================================ */
+
+function makeHair(){
+
+    const hair =
+        state.hair;
+
+
+    addSphere(
+        character,
+        hair,
+        [0,2.43,-.01],
+        [.36,.24,.32]
+    );
+
+
+    if(
+        state.hairStyle==="long"
+    ){
+
+        addSphere(
+            character,
+            hair,
+            [-.29,2.15,-.04],
+            [.105,.38,.15]
+        );
+
+        addSphere(
+            character,
+            hair,
+            [.29,2.15,-.04],
+            [.105,.38,.15]
+        );
+
+    }
+
+
+    if(
+        state.hairStyle==="bob"
+    ){
+
+        addSphere(
+            character,
+            hair,
+            [-.28,2.25,-.02],
+            [.10,.23,.15]
+        );
+
+        addSphere(
+            character,
+            hair,
+            [.28,2.25,-.02],
+            [.10,.23,.15]
+        );
+
+    }
+
+
+    if(
+        state.hairStyle==="ponytail"
+    ){
+
+        addSphere(
+            character,
+            hair,
+            [0,2.42,-.30],
+            [.13,.28,.13]
+        );
+
+    }
+
+
+    if(
+        state.hairStyle==="curly"
+    ){
+
+        for(
+            let i=0;
+            i<14;
+            i++
+        ){
+
+            const angle =
+                i /
+                14 *
+                Math.PI*2;
+
+            addSphere(
+                character,
+                hair,
+                [
+                    Math.cos(angle)*.31,
+                    2.27 +
+                    Math.sin(i*2)*.045,
+                    Math.sin(angle)*.22
+                ],
+                [.115,.13,.115]
+            );
+
+        }
+
+    }
+
+}
+
+
+/* ============================================================
+   ACCESSORIES
+============================================================ */
+
+function accessories(){
+
+    if(
+        state.accessory==="none"
+    ){
+        return;
+    }
+
+
+    if(
+        state.accessory==="tiara"
+    ){
+
+        const gold =
+            material(
+                "#f5cf69",
+                .22,
+                .7
+            );
+
+        const crown =
+            new THREE.Mesh(
+
+                new THREE.TorusGeometry(
+                    .22,
+                    .024,
+                    10,
+                    48
+                ),
+
+                gold
+            );
+
+        crown.position.set(
+            0,
+            2.54,
+            .04
+        );
+
+        crown.rotation.x=
+            Math.PI/2;
+
+        crown.scale.y=.55;
+
+        character.add(crown);
+
+
+        for(
+            let i=-2;
+            i<=2;
+            i++
+        ){
+
+            const jewel =
+                new THREE.Mesh(
+
+                    new THREE.ConeGeometry(
+                        .025,
+                        .08,
+                        4
+                    ),
+
+                    gold
+                );
+
+            jewel.position.set(
+                i*.065,
+                2.55 -
+                Math.abs(i)*.012,
+                .08
+            );
+
+            character.add(jewel);
+
+        }
+
+    }
+
+
+    if(
+        state.accessory==="bow"
+    ){
+
+        addSphere(
+            character,
+            "#ff9dcc",
+            [-.11,2.51,.10],
+            [.12,.075,.045]
+        );
+
+        addSphere(
+            character,
+            "#ff9dcc",
+            [.11,2.51,.10],
+            [.12,.075,.045]
+        );
+
+        addSphere(
+            character,
+            "#ff65a9",
+            [0,2.51,.11],
+            [.045,.045,.04]
+        );
+
+    }
+
+
+    if(
+        state.accessory==="necklace"
+    ){
+
+        const gold =
+            material(
+                "#f5cf69",
+                .2,
+                .65
+            );
+
+        const necklace =
+            new THREE.Mesh(
+
+                new THREE.TorusGeometry(
+                    .155,
+                    .018,
+                    8,
+                    48
+                ),
+
+                gold
+            );
+
+        necklace.position.set(
+            0,
+            1.79,
+            .08
+        );
+
+        necklace.rotation.x=
+            Math.PI/2;
+
+        necklace.scale.z=.7;
+
+        character.add(necklace);
+
+    }
+
+
+    if(
+        state.accessory==="earrings"
+    ){
+
+        addSphere(
+            character,
+            "#ffffff",
+            [-.34,2.08,.06],
+            [.035,.05,.035]
+        );
+
+        addSphere(
+            character,
+            "#ffffff",
+            [.34,2.08,.06],
+            [.035,.05,.035]
+        );
+
+    }
+
+
+    if(
+        state.accessory==="bag"
+    ){
+
+        const bag =
+            new THREE.Mesh(
+
+                new THREE.BoxGeometry(
+                    .20,
+                    .20,
+                    .10
+                ),
+
+                material(
+                    "#5d3a70",
+                    .35,
+                    .2
+                )
+            );
+
+        bag.position.set(
+            .43,
+            1.18,
+            .10
+        );
+
+        bag.rotation.z=-.12;
+
+        character.add(bag);
+
+
+        const strap =
+            new THREE.Mesh(
+
+                new THREE.TorusGeometry(
+                    .16,
+                    .012,
+                    8,
+                    32,
+                    Math.PI
+                ),
+
+                material("#f5cf69")
+            );
+
+        strap.position.set(
+            .35,
+            1.32,
+            .08
+        );
+
+        strap.rotation.z=
+            Math.PI/2;
+
+        character.add(strap);
+
+    }
+
+}
+
+
+/* ============================================================
+   CLOTHING
+============================================================ */
+
+function buildClothing(){
+
+    const c =
+        state.color;
+
+    const tc =
+        state.topColor;
+
+
+    /* ========================================================
+       DRESSES
+    ======================================================== */
+
+    if(state.model==="princess"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        belt(
+            "#f5cf69",
+            1.30,
+            .29
+        );
+
+        skirt(
+            c,
+            1.02,
+            .28,
+            .72,
+            .76
+        );
+
+    }
+
+
+    else if(state.model==="aline"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        belt(
+            "#ffffff",
+            1.30,
+            .285
+        );
+
+        skirt(
+            c,
+            1.04,
+            .28,
+            .61,
+            .69
+        );
+
+    }
+
+
+    else if(state.model==="mermaid"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        belt(
+            "#f5cf69"
+        );
+
+        skirt(
+            c,
+            1.02,
+            .28,
+            .39,
+            .76
+        );
+
+        skirt(
+            c,
+            .67,
+            .38,
+            .73,
+            .18
+        );
+
+    }
+
+
+    else if(state.model==="strapless"){
+
+        makeTop(
+            c,
+            "strapless"
+        );
+
+        skirt(
+            c,
+            1.03,
+            .28,
+            .59,
+            .70
+        );
+
+    }
+
+
+    else if(state.model==="miniDress"){
+
+        makeTop(
+            tc,
+            "crop"
+        );
+
+        belt(
+            "#f5cf69",
+            1.35
+        );
+
+        skirt(
+            c,
+            1.12,
+            .28,
+            .47,
+            .44
+        );
+
+    }
+
+
+    else if(state.model==="layeredDress"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        belt(
+            "#f5cf69"
+        );
+
+        layer(
+            c,
+            1.16,
+            .28,
+            .43,
+            .31
+        );
+
+        layer(
+            c,
+            .91,
+            .41,
+            .59,
+            .23
+        );
+
+        layer(
+            c,
+            .71,
+            .57,
+            .75,
+            .18
+        );
+
+    }
+
+
+    else if(state.model==="pleatedDress"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        belt(
+            "#ffffff"
+        );
+
+        pleatedSkirt(
+            c,
+            1.02,
+            .28,
+            .66,
+            .70
+        );
+
+    }
+
+
+    /* ========================================================
+       SKIRTS
+    ======================================================== */
+
+    else if(state.model==="pleated"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        belt(
+            "#ffffff"
+        );
+
+        pleatedSkirt(
+            c,
+            1.05,
+            .28,
+            .57,
+            .53
+        );
+
+    }
+
+
+    else if(state.model==="pencil"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        skirt(
+            c,
+            1.08,
+            .275,
+            .35,
+            .55
+        );
+
+    }
+
+
+    else if(state.model==="tennis"){
+
+        makeTop(
+            tc,
+            "crop"
+        );
+
+        belt(
+            "#ffffff",
+            1.35
+        );
+
+        pleatedSkirt(
+            c,
+            1.08,
+            .27,
+            .51,
+            .40
+        );
+
+    }
+
+
+    else if(state.model==="miniSkirt"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        skirt(
+            c,
+            1.14,
+            .27,
+            .47,
+            .38
+        );
+
+    }
+
+
+    else if(state.model==="longSkirt"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        skirt(
+            c,
+            .99,
+            .27,
+            .68,
+            .80
+        );
+
+    }
+
+
+    /* ========================================================
+       SHORTS
+    ======================================================== */
+
+    else if(state.model==="shorts"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        shorts(
+            c,
+            false
+        );
+
+    }
+
+
+    else if(state.model==="miniShorts"){
+
+        makeTop(
+            tc,
+            "crop"
+        );
+
+        shorts(
+            c,
+            true
+        );
+
+    }
+
+
+    /* ========================================================
+       PANTS
+    ======================================================== */
+
+    else if(state.model==="skinny"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        pants(
+            c,
+            "skinny"
+        );
+
+    }
+
+
+    else if(state.model==="straight"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        pants(
+            c,
+            "straight"
+        );
+
+    }
+
+
+    else if(state.model==="wide"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        pants(
+            c,
+            "wide"
+        );
+
+    }
+
+
+    else if(state.model==="flare"){
+
+        makeTop(
+            tc,
+            "elegant"
+        );
+
+        pants(
+            c,
+            "flare"
+        );
+
+    }
+
+
+    else if(state.model==="cargo"){
+
+        makeTop(
+            tc,
+            "oversize"
+        );
+
+        pants(
+            c,
+            "cargo"
+        );
+
+    }
+
+
+    /* ========================================================
+       TOPS
+    ======================================================== */
+
+    else if(state.model==="cropTop"){
+
+        makeTop(
+            c,
+            "crop"
+        );
+
+        skirt(
+            state.topColor,
+            1.05,
+            .27,
+            .57,
+            .53
+        );
+
+    }
+
+
+    else if(state.model==="oversize"){
+
+        makeTop(
+            c,
+            "oversize"
+        );
+
+        skirt(
+            state.topColor,
+            1.05,
+            .27,
+            .55,
+            .52
+        );
+
+    }
+
+
+    else if(state.model==="jacket"){
+
+        makeTop(
+            c,
+            "jacket"
+        );
+
+        skirt(
+            state.topColor,
+            1.05,
+            .27,
+            .56,
+            .53
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   FULL CHARACTER BUILD
+============================================================ */
+
+function buildCharacter(){
+
+    while(
+        character.children.length
+    ){
+
+        character.remove(
+            character.children[0]
+        );
+
+    }
+
+
+    body();
+
+    buildClothing();
+
+    accessories();
+
+
+    character.position.y=.06;
+
+}
+
+
+/* ============================================================
+   UI DATA
+============================================================ */
+
+const colorList=[
+
+    "#ed65ad",
+    "#9d83e8",
+    "#68c7c0",
+    "#f4c65d",
+    "#e85f72",
+    "#ffffff",
+    "#302b48",
+    "#4d79d8",
+    "#9b5fa8",
+    "#e59b78",
+    "#71a86c",
+    "#c64f87"
+
+];
+
+
+const dressModels=[
+
+    ["princess","👑 Prenses Balo"],
+    ["aline","🌸 A-Kesim"],
+    ["mermaid","🧜 Balık Model"],
+    ["strapless","✨ Straplez"],
+    ["miniDress","💗 Mini Elbise"],
+    ["layeredDress","🌺 Katlı Elbise"],
+    ["pleatedDress","🌷 Pileli Elbise"]
+
+];
+
+
+const bottomModels=[
+
+    ["pleated","🌸 Pileli Etek"],
+    ["pencil","🖤 Kalem Etek"],
+    ["tennis","🎾 Tenis Eteği"],
+    ["miniSkirt","💗 Mini Etek"],
+    ["longSkirt","🌹 Uzun Etek"],
+    ["shorts","🩳 Klasik Şort"],
+    ["miniShorts","💞 Mini Şort"],
+    ["skinny","👖 Skinny"],
+    ["straight","👖 Düz Pantolon"],
+    ["wide","👖 Bol Paça"],
+    ["flare","👖 İspanyol Paça"],
+    ["cargo","🪖 Kargo Pantolon"]
+
+];
+
+
+const topModels=[
+
+    ["cropTop","💜 Crop"],
+    ["oversize","👕 Oversize"],
+    ["jacket","🧥 Ceket"]
+
+];
+
+
+const content =
+    document.getElementById(
+        "content"
+    );
+
+
+let currentTab="clothes";
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+function toast(text){
+
+    const element =
+        document.getElementById(
+            "toast"
+        );
+
+    element.textContent=text;
+
+    element.classList.add(
+        "show"
+    );
+
+    setTimeout(
+        ()=>{
+            element.classList.remove(
+                "show"
+            );
+        },
+        1800
+    );
+
+}
+
+
+/* ============================================================
+   OPTIONS HTML
+============================================================ */
+
+function optionsHTML(
+    list,
+    key
+){
+
+    return list.map(
+        item=>`
+
+        <button
+            class="option ${
+                state.model===item[0]
+                ?"selected":""
+            }"
+            data-${key}="${item[0]}"
+        >
+            ${item[1]}
+        </button>
+
+        `
+    ).join("");
+
+}
+
+
+function colorsHTML(
+    current,
+    key
+){
+
+    return colorList.map(
+        color=>`
+
+        <div
+            class="color ${
+                current===color
+                ?"selected":""
+            }"
+            style="background:${color}"
+            data-${key}="${color}"
+        ></div>
+
+        `
+    ).join("");
+
+}
+
+
+/* ============================================================
+   RENDER UI
+============================================================ */
+
+function renderUI(){
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(
+            tab=>{
+
+                tab.classList.toggle(
+                    "active",
+                    tab.dataset.tab===
+                    currentTab
+                );
+
+            }
+        );
+
+
+    if(
+        currentTab==="clothes"
+    ){
+
+        content.innerHTML=`
+
+        <div class="group">
+
+            <div class="group-title">
+                👗 Elbise Koleksiyonu
+            </div>
+
+            <div class="options">
+                ${optionsHTML(
+                    dressModels,
+                    "model"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="group">
+
+            <div class="group-title">
+                👖 Etek & Alt Giyim
+            </div>
+
+            <div class="options">
+                ${optionsHTML(
+                    bottomModels,
+                    "model"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="group">
+
+            <div class="group-title">
+                👚 Üst Modeller
+            </div>
+
+            <div class="options">
+                ${optionsHTML(
+                    topModels,
+                    "model"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="group">
+
+            <div class="group-title">
+                🎨 Kıyafet Rengi
+            </div>
+
+            <div class="colors">
+                ${colorsHTML(
+                    state.color,
+                    "color"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="group">
+
+            <div class="group-title">
+                💜 Üst Rengi
+            </div>
+
+            <div class="colors">
+                ${colorsHTML(
+                    state.topColor,
+                    "topcolor"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="group">
+
+            <div class="group-title">
+                👠 Ayakkabı Rengi
+            </div>
+
+            <div class="colors">
+                ${colorsHTML(
+                    state.shoeColor,
+                    "shoecolor"
+                )}
+            </div>
+
+        </div>
+
+        `;
+
+    }
+
+
+    else if(
+        currentTab==="look"
+    ){
+
+        const hairColors=[
+            "#58334c",
+            "#241c29",
+            "#9b613b",
+            "#d9ad4e",
+            "#c76a9e",
+            "#6f5db7",
+            "#e5d5c2"
+        ];
+
+
+        const skinColors=[
+            "#f1c5a6",
+            "#e2ad89",
+            "#c98963",
+            "#a96649",
+            "#7e4d3b",
+            "#f6d8c0"
+        ];
+
+
+        content.innerHTML=`
+
+        <div class="group">
+
+            <div class="group-title">
+                💇 Saç Modeli
+            </div>
+
+            <div class="options">
+
+                <button
+                    class="option ${
+                        state.hairStyle==="long"
+                        ?"selected":""
+                    }"
+                    data-hairstyle="long"
+                >
+                    💇 Uzun
+                </button>
+
+                <button
+                    class="option ${
+                        state.hairStyle==="bob"
+                        ?"selected":""
+                    }"
+                    data-hairstyle="bob"
+                >
+                    ✂️ Bob
+                </button>
+
+                <button
+                    class="option ${
+                        state.hairStyle==="ponytail"
+                        ?"selected":""
+                    }"
+                    data-hairstyle="ponytail"
+                >
+                    👱 At Kuyruğu
+                </button>
+
+                <button
+                    class="option ${
+                        state.hairStyle==="curly"
+                        ?"selected":""
+                    }"
+                    data-hairstyle="curly"
+                >
+                    👩‍🦱 Kıvırcık
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="group">
+
+            <div class="group-title">
+                💇 Saç Rengi
+            </div>
+
+            <div class="colors">
+
+                ${hairColors.map(
+                    color=>`
+
+                    <div
+                        class="color ${
+                            state.hair===color
+                            ?"selected":""
+                        }"
+                        style="background:${color}"
+                        data-haircolor="${color}"
+                    ></div>
+
+                    `
+                ).join("")}
+
+            </div>
+
+        </div>
+
+
+        <div class="group">
+
+            <div class="group-title">
+                ✨ Ten Rengi
+            </div>
+
+            <div class="colors">
+
+                ${skinColors.map(
+                    color=>`
+
+                    <div
+                        class="color ${
+                            state.skin===color
+                            ?"selected":""
+                        }"
+                        style="background:${color}"
+                        data-skin="${color}"
+                    ></div>
+
+                    `
+                ).join("")}
+
+            </div>
+
+        </div>
+
+        `;
+
+    }
+
+
+    else{
+
+        content.innerHTML=`
+
+        <div class="group">
+
+            <div class="group-title">
+                👑 Aksesuar Koleksiyonu
+            </div>
+
+            <div class="options">
+
+                <button
+                    class="option ${
+                        state.accessory==="none"
+                        ?"selected":""
+                    }"
+                    data-accessory="none"
+                >
+                    🚫 Yok
+                </button>
+
+                <button
+                    class="option ${
+                        state.accessory==="tiara"
+                        ?"selected":""
+                    }"
+                    data-accessory="tiara"
+                >
+                    👑 Taç
+                </button>
+
+                <button
+                    class="option ${
+                        state.accessory==="bow"
+                        ?"selected":""
+                    }"
+                    data-accessory="bow"
+                >
+                    🎀 Fiyonk
+                </button>
+
+                <button
+                    class="option ${
+                        state.accessory==="necklace"
+                        ?"selected":""
+                    }"
+                    data-accessory="necklace"
+                >
+                    📿 Kolye
+                </button>
+
+                <button
+                    class="option ${
+                        state.accessory==="earrings"
+                        ?"selected":""
+                    }"
+                    data-accessory="earrings"
+                >
+                    💎 Küpe
+                </button>
+
+                <button
+                    class="option ${
+                        state.accessory==="bag"
+                        ?"selected":""
+                    }"
+                    data-accessory="bag"
+                >
+                    👜 Çanta
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="group">
+
+            <div class="group-title">
+                💎 Stil
+            </div>
+
+            <p
+                style="
+                    color:#aaa0ba;
+                    font-size:10px;
+                    line-height:1.6;
+                "
+            >
+                Aksesuarları karakter üzerinde
+                birlikte kullanabilir ve farklı
+                kıyafetlerle kombinleyebilirsin.
+            </p>
+
+        </div>
+
+        `;
+
+    }
+
+
+    /* EVENTLER */
+
+    content
+        .querySelectorAll(
+            ".option,.color"
+        )
+        .forEach(
+            element=>{
+
+                element.onclick=()=>{
+
+                    const d =
+                        element.dataset;
+
+
+                    if(d.model){
+
+                        state.model=
+                            d.model;
+
+                    }
+
+
+                    if(d.color){
+
+                        state.color=
+                            d.color;
+
+                    }
+
+
+                    if(d.topcolor){
+
+                        state.topColor=
+                            d.topcolor;
+
+                    }
+
+
+                    if(d.shoecolor){
+
+                        state.shoeColor=
+                            d.shoecolor;
+
+                    }
+
+
+                    if(d.hairstyle){
+
+                        state.hairStyle=
+                            d.hairstyle;
+
+                    }
+
+
+                    if(d.haircolor){
+
+                        state.hair=
+                            d.haircolor;
+
+                    }
+
+
+                    if(d.skin){
+
+                        state.skin=
+                            d.skin;
+
+                    }
+
+
+                    if(d.accessory){
+
+                        state.accessory=
+                            d.accessory;
+
+                    }
+
+
+                    buildCharacter();
+
+                    renderUI();
+
+                    toast(
+                        "✨ Tasarım değiştirildi"
+                    );
+
+                };
+
+            }
+        );
+
+}
+
+
+/* ============================================================
+   TAB EVENTS
+============================================================ */
+
+document
+    .querySelectorAll(".tab")
+    .forEach(
+        tab=>{
+
+            tab.onclick=()=>{
+
+                currentTab=
+                    tab.dataset.tab;
+
+                renderUI();
+
+            };
+
+        }
+    );
+
+
+/* ============================================================
+   RANDOM OUTFIT
+============================================================ */
+
+document
+    .getElementById("randomBtn")
+    .onclick=()=>{
+
+        const allModels=[
+            ...dressModels,
+            ...bottomModels,
+            ...topModels
+        ];
+
+
+        const selected=
+            allModels[
+                Math.floor(
+                    Math.random()*
+                    allModels.length
+                )
+            ];
+
+
+        state.model=
+            selected[0];
+
+
+        state.color=
+            colorList[
+                Math.floor(
+                    Math.random()*
+                    colorList.length
+                )
+            ];
+
+
+        state.topColor=
+            colorList[
+                Math.floor(
+                    Math.random()*
+                    colorList.length
+                )
+            ];
+
+
+        state.hairStyle=[
+            "long",
+            "bob",
+            "ponytail",
+            "curly"
+        ][
+            Math.floor(
+                Math.random()*4
+            )
+        ];
+
+
+        state.accessory=[
+            "none",
+            "tiara",
+            "bow",
+            "necklace",
+            "earrings",
+            "bag"
+        ][
+            Math.floor(
+                Math.random()*6
+            )
+        ];
+
+
+        buildCharacter();
+
+        renderUI();
+
+        toast(
+            "🎲 Yeni kombin hazır!"
+        );
+
+    };
+
+
+/* ============================================================
+   ROTATE
+============================================================ */
+
+let autoRotate=false;
+
+document
+    .getElementById("rotateBtn")
+    .onclick=()=>{
+
+        autoRotate=
+            !autoRotate;
+
+        toast(
+            autoRotate
+            ? "🔄 Podyum dönüyor"
+            : "⏸ Dönüş durdu"
+        );
+
+    };
+
+
+/* ============================================================
+   POSE
+============================================================ */
+
+let poseIndex=0;
+
+document
+    .getElementById("poseBtn")
+    .onclick=()=>{
+
+        poseIndex++;
+
+        if(
+            poseIndex>3
+        ){
+
+            poseIndex=0;
+
+        }
+
+
+        if(
+            poseIndex===0
+        ){
+
+            character.rotation.z=0;
+
+        }
+
+
+        if(
+            poseIndex===1
+        ){
+
+            character.rotation.z=
+                -.045;
+
+        }
+
+
+        if(
+            poseIndex===2
+        ){
+
+            character.rotation.z=
+                .045;
+
+        }
+
+
+        if(
+            poseIndex===3
+        ){
+
+            character.rotation.z=
+                -.08;
+
+        }
+
+
+        toast(
+            "💃 Poz değiştirildi"
+        );
+
+    };
+
+
+/* ============================================================
+   RESET
+============================================================ */
+
+document
+    .getElementById("resetBtn")
+    .onclick=()=>{
+
+        character.rotation.set(
+            0,
+            0,
+            0
+        );
+
+        camera.position.set(
+            0,
+            2.05,
+            7.2
+        );
+
+        controls.target.set(
+            0,
+            1.35,
+            0
+        );
+
+        controls.update();
+
+        autoRotate=false;
+
+        toast(
+            "↩ Stüdyo sıfırlandı"
+        );
+
+    };
+
+
+/* ============================================================
+   SAVE IMAGE
+============================================================ */
+
+document
+    .getElementById("saveBtn")
+    .onclick=()=>{
+
+        renderer.render(
+            scene,
+            camera
+        );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+        link.download=
+            "esranin-dunyasi-3d.png";
+
+        link.href=
+            renderer.domElement
+                .toDataURL(
+                    "image/png"
+                );
+
+        link.click();
+
+        toast(
+            "📸 Kombin fotoğrafı kaydedildi"
+        );
+
+    };
+
+
+/* ============================================================
+   RESIZE
+============================================================ */
+
+window.addEventListener(
+    "resize",
+    ()=>{
+
+        const width =
+            canvas.clientWidth;
+
+        const height =
+            canvas.clientHeight;
+
+
+        renderer.setSize(
+            width,
+            height,
+            false
+        );
+
+
+        camera.aspect =
+            width /
+            height;
+
+        camera.updateProjectionMatrix();
+
+    }
+);
+
+
+/* ============================================================
+   START
+============================================================ */
+
 buildCharacter();
+
 renderUI();
 
-function animate() {
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
+
+/* ============================================================
+   ANIMATION
+============================================================ */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    if(autoRotate){
+
+        character.rotation.y +=
+            .006;
+
+    }
+
+
+    controls.update();
+
+    renderer.render(
+        scene,
+        camera
+    );
+
 }
+
 animate();
+
 </script>
+
 </body>
-</html>
+</html>,
